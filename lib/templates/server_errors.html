@@ -1,0 +1,14 @@
+@extends layout
+
+<b-title>{{ $code }} {{ $message }}</b-title>
+
+<b-meta>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+</b-meta>
+
+<b-content>
+    <div class="server-err">
+        <h1>{{ $code }}<br/>{{ $message }}</h1>
+    </div>
+</b-content>

@@ -1,0 +1,38 @@
+@extends layout
+
+<b-title>Error!</b-title>
+
+<b-meta>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+</b-meta>
+
+<b-content>
+    <?php
+    $file = file($e->getFile());
+    $start = $e->getLine() - 10;
+    
+    if ($start < 0) {
+        $start = 0;
+    }
+
+    $end = $e->getLine() + 10;
+
+    if ($end >= count($file)) {
+        $end = count($file) - 1;
+    }
+    ?>
+    <h1 class="title">Error in file {{ $e->getFile() }} on line: {{ $e->getLine() }}</h1>
+    <pre class="code">
+    @for ($i=$start; $i<=$end; $i++)
+        <span class="line-num">{{ $i }}</span>
+        @if ($i == $e->getLine() - 1)
+        <div class="err-line">{{ $file[$i] }} // Error: {{ $e->getMessage() }}</div>
+        @else
+        {{ $file[$i] }}
+        @endif
+        
+        <br/>
+    @endfor
+    </pre>
+</b-content>
